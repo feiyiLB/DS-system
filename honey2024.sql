@@ -128,37 +128,4 @@ INSERT INTO `orders` VALUES (4, 'b6e4e0945c094bf8b0e181b40b5d42c3', 'AD钙奶', 
 INSERT INTO `orders` VALUES (5, '1088005da31840dab7a759129631373d', '香蕉', 9.90, 25, '水果', '2023-10-08');
 INSERT INTO `orders` VALUES (6, '8e2b94f03c634e91b2e74ee0e0c3a4cc', '西红柿', 6.90, 25, '蔬菜', '2023-10-08');
 
--- ----------------------------
--- Table structure for user
--- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '用户名',
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '密码',
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '姓名',
-  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '电话',
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '邮箱',
-  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '地址',
-  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '头像',
-  `role` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '角色',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 51 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES (13, 'qing2', '123', '青哥哥', '13588999966', 'qing@163.com', '安徽省合肥市蜀山区', NULL, '用户');
-INSERT INTO `user` VALUES (14, 'qing3', '123', '青哥哥', '13588999966', 'qing@163.com', '安徽省合肥市蜀山区', NULL, '用户');
-INSERT INTO `user` VALUES (15, 'qing4', '123', '青哥哥', '13588999966', 'qing@163.com', '安徽省合肥市蜀山区', NULL, '用户');
-INSERT INTO `user` VALUES (16, 'qing5', '123', '青哥哥', '13588999966', 'qing@163.com', '安徽省合肥市蜀山区', NULL, '用户');
-INSERT INTO `user` VALUES (25, 'admin', 'admin', 'admin', NULL, NULL, NULL, NULL, '管理员');
-INSERT INTO `user` VALUES (29, 'qing6', '123', '青哥哥', '13588999966', 'qing@163.com', '安徽省合肥市蜀山区', '', '用户');
-INSERT INTO `user` VALUES (30, 'qing7', '123', '青哥哥', '13588999966', 'qing@163.com', '安徽省合肥市蜀山区', '', '用户');
-INSERT INTO `user` VALUES (47, 'qing11', '123', '青哥哥', '13588999966', 'qing@163.com', '安徽省合肥市蜀山区', '', '用户');
-INSERT INTO `user` VALUES (48, 'qing12', '123', '青哥哥', '13588999966', 'qing@163.com', '安徽省合肥市蜀山区', 'http://localhost:9090/file/download/QQ截图20230330090359.png', '用户');
-INSERT INTO `user` VALUES (49, 'qing13', '123', '青哥哥', '13588999966', 'qing@163.com', '安徽省合肥市蜀山区', 'http://localhost:9090/file/download/微信截图_20230801220029.png', '用户');
-INSERT INTO `user` VALUES (50, 'gbb', '123', 'gbb', NULL, NULL, NULL, NULL, '用户');
-
 SET FOREIGN_KEY_CHECKS = 1;

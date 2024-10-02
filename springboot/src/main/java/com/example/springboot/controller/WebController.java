@@ -23,8 +23,6 @@ import java.util.stream.Collectors;
 
 /**
  * 功能：提供接口返回数据
- * 作者：程序员青戈
- * 日期：2023/8/13 15:55
  */
 @RestController
 public class WebController {
