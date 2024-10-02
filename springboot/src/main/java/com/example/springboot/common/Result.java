@@ -3,8 +3,7 @@ package com.example.springboot.common;
 import lombok.*;
 
 /**
- * 接口统一返回包装类
- * 作者：程序员青戈
+
  */
 @Getter
 @Setter
