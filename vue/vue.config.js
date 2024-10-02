@@ -7,7 +7,7 @@ module.exports = defineConfig({
   chainWebpack: config =>{
     config.plugin('html')
         .tap(args => {
-          args[0].title = "青哥哥好帅啊";
+          args[0].title = "DS-system";
           return args;
         })
   }
