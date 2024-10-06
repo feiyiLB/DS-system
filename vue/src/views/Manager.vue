@@ -8,7 +8,7 @@
           <span class="logo-title" v-show="!isCollapse">DS-system</span>
         </div>
 
-        <el-menu :default-openeds="['info']" :collapse="isCollapse" :collapse-transition="false" router background-color="#001529" text-color="rgba(255, 255, 255, 0.65)"
+        <el-menu :default-openeds="['info','new']" :collapse="isCollapse" :collapse-transition="false" router background-color="#001529" text-color="rgba(255, 255, 255, 0.65)"
                  active-text-color="#fff" style="border: none" :default-active="$route.path">
           <el-menu-item index="/home">
             <i class="el-icon-s-home"></i>
@@ -25,6 +25,13 @@
             <el-menu-item index="/logs" v-if="user.role === '管理员'">系统日志</el-menu-item>
             <el-menu-item index="/charts" v-if="user.role === '管理员'">数据统计</el-menu-item>
             <el-menu-item index="/orders">订单管理</el-menu-item>
+          </el-submenu>
+          <el-submenu index="new">
+            <template slot="title">
+                <i class="el-icon-menu"></i>
+              <span>新功能</span>
+            </template>
+            <el-menu-item index="/chat">聊天功能</el-menu-item>
           </el-submenu>
         </el-menu>
 
