@@ -6,15 +6,15 @@
       </div>
       <div style="flex: 1; display: flex; align-items: center; justify-content: center">
         <el-form :model="user" style="width: 80%" :rules="rules" ref="registerRef">
-          <div style="font-size: 20px; font-weight: bold; text-align: center; margin-bottom: 20px">欢迎注册后台管理系统</div>
+          <div style="font-size: 20px; font-weight: bold; text-align: center; margin-bottom: 20px">Welcome back-stage system</div>
           <el-form-item prop="username">
-            <el-input prefix-icon="el-icon-user" size="medium" placeholder="请输入账号" v-model="user.username"></el-input>
+            <el-input prefix-icon="el-icon-user" size="medium" placeholder="Account" v-model="user.username"></el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input prefix-icon="el-icon-lock" size="medium" show-password placeholder="请输入密码" v-model="user.password"></el-input>
+            <el-input prefix-icon="el-icon-lock" size="medium" show-password placeholder="Password" v-model="user.password"></el-input>
           </el-form-item>
           <el-form-item prop="confirmPass">
-            <el-input prefix-icon="el-icon-lock" size="medium" show-password placeholder="请确认密码" v-model="user.confirmPass"></el-input>
+            <el-input prefix-icon="el-icon-lock" size="medium" show-password placeholder="Confirm Password" v-model="user.confirmPass"></el-input>
           </el-form-item>
           <el-form-item prop="role">
             <el-radio-group v-model="user.role">
@@ -23,10 +23,10 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item>
-            <el-button type="info" style="width: 100%" @click="register">注 册</el-button>
+            <el-button type="info" style="width: 100%" @click="register">Sign Up</el-button>
           </el-form-item>
           <div style="display: flex">
-            <div style="flex: 1">已经有账号了？请 <span style="color: #6e77f2; cursor: pointer" @click="$router.push('/login')">登录</span></div>
+            <div style="flex: 1">Already have an account? <span style="color: #6e77f2; cursor: pointer" @click="$router.push('/login')">Sign In</span></div>
           </div>
         </el-form>
       </div>

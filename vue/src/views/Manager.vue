@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="whole">
     <el-container>
       <!--    侧边栏  -->
       <el-aside :width="asideWidth" style="min-height: 100vh; background-color: #001529">
@@ -12,26 +12,26 @@
                  active-text-color="#fff" style="border: none" :default-active="$route.path">
           <el-menu-item index="/home">
             <i class="el-icon-s-home"></i>
-            <span slot="title">系统首页</span>
+            <span slot="title">HomePage</span>
           </el-menu-item>
           <el-submenu index="info" >
             <template slot="title">
               <i class="el-icon-menu"></i>
-              <span>信息管理</span>
+              <span>Info&Manage</span>
             </template>
-            <el-menu-item index="/user" v-if="user.role === '管理员'">用户信息</el-menu-item>
-            <el-menu-item index="/news">新闻信息</el-menu-item>
-            <el-menu-item index="/notice" v-if="user.role === '管理员'">系统公告</el-menu-item>
-            <el-menu-item index="/logs" v-if="user.role === '管理员'">系统日志</el-menu-item>
-            <el-menu-item index="/charts" v-if="user.role === '管理员'">数据统计</el-menu-item>
-            <el-menu-item index="/orders">订单管理</el-menu-item>
+            <el-menu-item index="/user" v-if="user.role === '管理员'">User Info</el-menu-item>
+            <el-menu-item index="/news">News Info</el-menu-item>
+            <el-menu-item index="/notice" >System Notice</el-menu-item>
+            <el-menu-item index="/logs" >System Logs</el-menu-item>
+            <el-menu-item index="/charts" >Data Statistics</el-menu-item>
+            <el-menu-item index="/orders">Order Management</el-menu-item>
           </el-submenu>
           <el-submenu index="new">
             <template slot="title">
                 <i class="el-icon-menu"></i>
-              <span>新功能</span>
+              <span>AI+DS</span>
             </template>
-            <el-menu-item index="/chat">聊天功能</el-menu-item>
+            <el-menu-item index="/chat">AI Chat</el-menu-item>
           </el-submenu>
         </el-menu>
 
@@ -43,7 +43,7 @@
 
           <i :class="collapseIcon" style="font-size: 26px" @click="handleCollapse"></i>
           <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-left: 20px">
-            <el-breadcrumb-item :to="{ path: '/' }">主页</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: $route.path }">{{ $route.meta.name }}</el-breadcrumb-item>
           </el-breadcrumb>
 
@@ -55,9 +55,9 @@
                 <span>{{ user.name }}</span>
               </div>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item @click.native="$router.push('/person')">个人信息</el-dropdown-item>
-                <el-dropdown-item @click.native="$router.push('/password')">修改密码</el-dropdown-item>
-                <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
+                <el-dropdown-item @click.native="$router.push('/person')">Personal Info</el-dropdown-item>
+                <el-dropdown-item @click.native="$router.push('/password')">Change Password</el-dropdown-item>
+                <el-dropdown-item @click.native="logout">Log out</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
@@ -65,7 +65,7 @@
         </el-header>
 
         <!--        主体区域-->
-        <el-main>
+        <el-main style="padding: 10px">
           <router-view @update:user="updateUser" />
         </el-main>
 
@@ -173,4 +173,6 @@ export default {
   display: flex;
   align-items: center;
 }
+
+
 </style>

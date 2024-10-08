@@ -1,35 +1,35 @@
 <template>
   <div>
     <div>
-      <el-input style="width: 200px" placeholder="查询标题" v-model="title"></el-input>
-      <el-button type="primary" style="margin-left: 10px" @click="load(1)">查询</el-button>
-      <el-button type="info" @click="reset">重置</el-button>
+      <el-input style="width: 200px" placeholder="Search Title" v-model="title"></el-input>
+      <el-button type="primary" style="margin-left: 10px" @click="load(1)">Search</el-button>
+      <el-button type="info" @click="reset">Reset</el-button>
     </div>
     <div style="margin: 10px 0">
-      <el-button type="primary" plain @click="handleAdd">新增</el-button>
-      <el-button type="danger" plain @click="delBatch">批量删除</el-button>
+      <el-button type="primary" plain @click="handleAdd">Update</el-button>
+      <el-button type="danger" plain @click="delBatch">Batch Delete</el-button>
     </div>
     <el-table :data="tableData" stripe :header-cell-style="{ backgroundColor: 'aliceblue', color: '#666' }" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"></el-table-column>
-      <el-table-column prop="id" label="序号" width="70" align="center"></el-table-column>
-      <el-table-column prop="title" label="标题"></el-table-column>
-      <el-table-column prop="description" label="简介"></el-table-column>
-      <el-table-column prop="content" label="内容">
+      <el-table-column prop="id" label="id" width="70" align="center"></el-table-column>
+      <el-table-column prop="title" label="title"></el-table-column>
+      <el-table-column prop="description" label="description"></el-table-column>
+      <el-table-column prop="content" label="content">
         <template v-slot="scope">
-          <el-button @click="showContent(scope.row.content)" size="mini">显示内容</el-button>
+          <el-button @click="showContent(scope.row.content)" size="mini">Show Content</el-button>
         </template>
       </el-table-column>
-      <el-table-column prop="content" label="详情页">
+      <el-table-column prop="content" label="content">
         <template v-slot="scope">
-          <el-button @click="$router.push('/newsDetail?id=' + scope.row.id)" size="mini">在详情页显示</el-button>
+          <el-button @click="$router.push('/newsDetail?id=' + scope.row.id)" size="mini">Show Details</el-button>
         </template>
       </el-table-column>
-      <el-table-column prop="author" label="发布人"></el-table-column>
-      <el-table-column prop="time" label="发布时间"></el-table-column>
-      <el-table-column label="操作" align="center" width="180">
+      <el-table-column prop="author" label="author"></el-table-column>
+      <el-table-column prop="time" label="time"></el-table-column>
+      <el-table-column label="Operation" align="center" width="180">
         <template v-slot="scope">
-          <el-button size="mini" type="primary" plain @click="handleEdit(scope.row)">编辑</el-button>
-          <el-button size="mini" type="danger" plain @click="del(scope.row.id)">删除</el-button>
+          <el-button size="mini" type="primary" plain @click="handleEdit(scope.row)">Edit</el-button>
+          <el-button size="mini" type="danger" plain @click="del(scope.row.id)">Delete</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -44,22 +44,22 @@
       </el-pagination>
     </div>
 
-    <el-dialog title="新闻信息" :visible.sync="fromVisible" width="60%" @close="closeDialog" :close-on-click-modal="false">
+    <el-dialog title="News Info" :visible.sync="fromVisible" width="60%" @close="closeDialog" :close-on-click-modal="false">
       <el-form :model="form" label-width="80px" style="padding-right: 20px" :rules="rules" ref="formRef">
-        <el-form-item label="标题" prop="title">
-          <el-input v-model="form.title" placeholder="标题"></el-input>
+        <el-form-item label="Title" prop="title">
+          <el-input v-model="form.title" placeholder="Title"></el-input>
         </el-form-item>
-        <el-form-item label="简介" prop="content">
-          <el-input v-model="form.description" placeholder="简介"></el-input>
+        <el-form-item label="Subject" prop="content">
+          <el-input v-model="form.description" placeholder="Subject"></el-input>
         </el-form-item>
-        <el-form-item label="内容" prop="content">
+        <el-form-item label="Content" prop="content">
           <div id="editor"></div>
         </el-form-item>
       </el-form>
 
       <div slot="footer" class="dialog-footer">
-        <el-button @click="fromVisible = false">取 消</el-button>
-        <el-button type="primary" @click="save">确 定</el-button>
+        <el-button @click="fromVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="save">Confirm</el-button>
       </div>
     </el-dialog>
 

@@ -28,7 +28,7 @@ import * as echarts from 'echarts'
 
 const option = {
   title: {
-    text: '订单销售的趋势图',
+    text: 'Sales diagram',
     left: 'center'
   },
   tooltip: {
@@ -46,7 +46,7 @@ const option = {
   },
   series: [
     {
-      name: '金额',
+      name: 'money',
       data: [],
       type: 'line',
       smooth: true
@@ -56,7 +56,7 @@ const option = {
 
 const option1 = {
   title: {
-    text: '订单销售的柱状图',
+    text: 'Sales bar chart',
     left: 'center'
   },
   tooltip: {
@@ -74,7 +74,7 @@ const option1 = {
   },
   series: [
     {
-      name: '金额',
+      name: 'Sales',
       data: [],
       type: 'bar',
       smooth: true
@@ -84,8 +84,8 @@ const option1 = {
 
 const option2 = {
   title: {
-    text: '订单销售统计',
-    subtext: '比例图',
+    text: 'Sales statistics',
+    subtext: 'pie chart',
     left: 'center'
   },
   tooltip: {
@@ -97,7 +97,7 @@ const option2 = {
   },
   series: [
     {
-      name: '金额',
+      name: 'Sales',
       type: 'pie',
       center: ['50%', '60%'],
       radius: '50%',

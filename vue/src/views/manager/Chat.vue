@@ -1,18 +1,77 @@
 <script>
+import logo1 from '@/assets/logo1.png'
 export default {
   name: "Chat",
   data(){
     return{
       user: JSON.parse(localStorage.getItem('honey-user') || '{}'),
       inputContents:'',
+      contentList:[],
+      logo1:logo1,
 
     }
   },
   methods:{
     onSend(){
+      const userQuestion = this.inputContents;
 
-    }
-  }
+      if (!userQuestion.trim()) {
+        return;  // Don't send if the input is empty
+      }
+
+      // Add the user's question to the contentList immediately
+      const userMessage = {
+        question: userQuestion,
+        answer: "Waiting for AI response...",  // Placeholder until we get the actual answer
+        time: new Date().toISOString().slice(0, 19).replace('T', ' ')  // Format current time
+      };
+      this.contentList.push(userMessage);
+
+      // Clear the input after sending
+      this.inputContents = '';
+
+      this.$request.post('/chat/add', {
+        question: userQuestion
+      })
+          .then(response => {
+            // Assuming the backend returns a 200 code and the updated chat object with the answer
+            if (response.code === '200') {
+              const returnedChat = response.data;  // This should contain the question, answer, and time
+
+              // Find the last message and update the answer
+              this.contentList[this.contentList.length - 1].answer = returnedChat.answer;
+            } else {
+              console.error('Error sending message:', response.msg);
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            // Update the answer with error message if there's a failure
+            this.contentList[this.contentList.length - 1].answer = 'Error sending message';
+          });
+    },
+    fetchChatHistory() {
+      // Replace the URL with your backend API endpoint
+      this.$request.get('/chat/getChat')
+          .then(res => {
+            // Check if the response is successful
+            if (res.code === '200') {
+              // Store the chat history in contentList
+              this.contentList = res.data;
+            } else {
+              this.$message.error('Error fetching chat history:', res.msg);
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+    },
+
+  },
+  mounted() {
+    // Make the API call when the component is mounted
+    this.fetchChatHistory();
+  },
 }
 </script>
 
@@ -21,32 +80,33 @@ export default {
   <div class="chat-panel">
     <div class="message-panel">
       <div class="message-title">
-        <el-text class="w-150px mb-2" line-clamp="1" truncated size="large">
-          智能聊天
-        </el-text>
+        <span class="w-150px mb-2" >
+          AI Chat
+        </span>
       </div>
         <div class="message-list">
-          <div class="message-list-item">
-            <div class="message-list-item-right">
+          <div class="message-list-item" v-for="item in contentList" :key="item.id">
+            <div class="message-list-item-right" v-if="item.question">
               <div class="message">
                 <el-card>
                   <div class="message-text">
-                    questionaaaaaaaaaaa
+                    {{item.question}}
                   </div>
                 </el-card>
               </div>
               <div>
-                <el-avatar :size="50" :src="user.avatar" />
+                <img :src="user.avatar || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'" alt="" style="width: 50px; height: 50px; border-radius: 50%; margin: 0 5px">
+
               </div>
             </div>
-            <div class="message-list-item-left">
+            <div class="message-list-item-left" v-if="item.answer">
               <div>
-                <el-avatar ></el-avatar>
+                <el-avatar :src="logo1"></el-avatar>
               </div>
               <div class="message">
                 <el-card>
                   <div>
-                    answer
+                    {{item.answer}}
                   </div>
                 </el-card>
               </div>
@@ -58,13 +118,12 @@ export default {
 
       <div class="input-box">
         <div class="send">
-          <el-input v-model="inputContents" placeholder="请输入内容" style="border-radius: 10px 0 0 10px;"
+          <el-input v-model="inputContents" placeholder="Input anything you like" style="border-radius: 10px 0 0 10px;"
                     :autosize="{ minRows: 1, maxRows: 4 }" type="textarea" resize="none" @keydown.enter.native="onSend"
                     class="input_chat">
           </el-input>
-          <el-tooltip class="box-item" :content="sendStatus ? '请稍后提问' : '请输入您的问题'" placement="top-start"
-                      :disabled="inputContents.trim() !== ''">
-            <el-button color="#62a7ef" style="border-radius: 0 10px 10px 0;color: #fff;" @click="onSend"
+          <el-tooltip class="box-item">
+            <el-button color="#62a7ef" style="border-radius: 0 10px 10px 0;color: #fff; background-color:  rgb(2,19,39)" @click="onSend"
             >发送</el-button>
           </el-tooltip>
 
@@ -76,10 +135,9 @@ export default {
 </div>
 </template>
 
-<style scoped lang="css">
+<style scoped lang="scss">
 .home-view {
-  width: 100%;
-  height: 100%;
+  height:89vh;
 
 
   .chat-panel {
@@ -137,14 +195,10 @@ export default {
 
     /* 右侧消息记录面板*/
     .message-panel {
-      height: 100%;
-      width: 100%;
-
 
       display: flex;
       flex-direction: column;
-
-      padding: 10px;
+      width: 2000px;
       box-sizing: border-box;
 
       .message-title {
@@ -175,11 +229,8 @@ export default {
         justify-content: center;
         cursor: pointer;
       }
-
-
-
       .w-150px {
-        width: 150px;
+        width: 100px;
         /* 确保文本框的宽度 */
         margin-bottom: 2px;
         /* 文本框下方的边距，如果需要 */
@@ -191,9 +242,8 @@ export default {
         height: 95%;
         display: flex;
         flex-direction: column;
-
         overflow-y: scroll;
-
+        box-sizing: border-box;
         .message-list-item {
           display: flex;
           align-items: flex-start;
@@ -218,18 +268,20 @@ export default {
               }
             }
           }
-
           .message-list-item-right {
             align-self: flex-end;
             justify-content: flex-end;
-
             .message {
-
               .message-text {
                 word-spacing: normal;
 
               }
             }
+            .el-avatar img {
+              width: 60px; /* 设置图片宽度 */
+              height: 60px; /* 设置图片高度 */
+            }
+
           }
 
         }
@@ -247,14 +299,10 @@ export default {
       .input-box {
         width: 100%;
         margin-top: 10px;
-
         .send {
-
           display: flex;
           align-items: flex-end;
           justify-content: center;
-
-
         }
       }
 

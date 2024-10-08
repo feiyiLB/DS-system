@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="box-shadow: 0 0 10px rgba(0,0,0,.1); padding: 10px 20px; border-radius: 5px; margin-bottom: 10px">
-      早安，{{ user.name }}，祝你开心每一天！
+      Hello，{{ user.name }}，Happy every day！
     </div>
 
     <div style="display: flex">
@@ -11,21 +11,13 @@
         </div>
         <div>
           Use data science to change the world
-          <div style="margin-top: 20px">
-            <div style="margin: 10px 0"><strong>主题色</strong></div>
-            <el-button type="primary">按钮</el-button>
-            <el-button type="success">按钮</el-button>
-            <el-button type="warning">按钮</el-button>
-            <el-button type="danger">按钮</el-button>
-            <el-button type="info">按钮</el-button>
-          </div>
         </div>
       </el-card>
     </div>
 
     <div style="display: flex; margin: 15px 0">
       <el-card style="width: 50%; margin-right: 10px">
-        <div style="margin-bottom: 15px; font-size: 20px; font-weight: bold">系统公告</div>
+        <div style="margin-bottom: 15px; font-size: 20px; font-weight: bold">system notice</div>
         <el-timeline style="padding: 0">
           <el-timeline-item v-for="item in notices" :key="item.id" :timestamp="item.time" placement="top">
             <el-card>
@@ -37,7 +29,7 @@
       </el-card>
 
       <el-card style="width: 50%">
-        <div style="margin-bottom: 15px; font-size: 20px; font-weight: bold">系统公告</div>
+        <div style="margin-bottom: 15px; font-size: 20px; font-weight: bold">System Notice</div>
         <el-collapse v-model="activeName" accordion>
           <el-collapse-item  v-for="(item, index) in notices" :key="item.id" :name="index + ''">
             <template slot="title">
